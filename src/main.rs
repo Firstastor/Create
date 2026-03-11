@@ -1,12 +1,17 @@
 use bevy::prelude::*;
 
-pub mod assets;
-pub mod configs;
-pub mod ui;
-
 fn main() {
     App::new()
-        .add_plugins(configs::ConfigsPlugin)
-        .add_plugins(ui::UIPlugin)
+        .add_plugins(DefaultPlugins.set(WindowPlugin {
+            primary_window: Some(Window {
+                present_mode: bevy::window::PresentMode::default(),
+                mode: bevy::window::WindowMode::default(),
+                position: bevy::window::WindowPosition::Centered(MonitorSelection::Primary),
+                resolution: bevy::window::WindowResolution::default(),
+                title: "Create".to_string(),
+                ..default()
+            }),
+            ..default()
+        }))
         .run();
 }
